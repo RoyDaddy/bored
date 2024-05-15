@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Suggestion App</title>
+</head>
+<body>
+    <h1>Find Something To Do!</h1>
+    <button id="getActivityButton">Get Activity</button>
+    <p id="activity">Click the button to get a new activity.</p>
+
+    <script>
+        document.getElementById('getActivityButton').addEventListener('click', function() {
+            fetch('https://www.boredapi.com/api/activity')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('activity').textContent = data.activity;
+                })
+                .catch(error => {
+                    document.getElementById('activity').textContent = 'Failed to load activity.';
+                    console.error('Error fetching activity:', error);
+                });
+        });
+    </script>
+</body>
+</html>
